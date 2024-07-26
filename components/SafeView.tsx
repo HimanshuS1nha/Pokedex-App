@@ -13,7 +13,7 @@ const SafeView = ({
   style,
 }: {
   children: React.ReactNode;
-  style: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
 }) => {
   return (
     <SafeAreaView
