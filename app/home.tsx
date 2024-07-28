@@ -1,45 +1,45 @@
-import { View, Text } from "react-native";
+import { View, Text, ActivityIndicator, Alert } from "react-native";
 import React from "react";
 import tw from "twrnc";
 import { FlashList } from "@shopify/flash-list";
+import { useQuery } from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
 
 import SafeView from "@/components/SafeView";
 import PokemonCard from "@/components/PokemonCard";
 
 const Home = () => {
-  const pokemons = [
-    {
-      id: "1",
-      name: "Bulbasaur",
-      types: ["grass", "poison"],
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-      color: "green",
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["get-all-pokemon"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon?offset=0&limit=8"
+      );
+      return data as { results: { name: string; url: string }[] };
     },
-    {
-      id: "2",
-      name: "Charmander",
-      types: ["fire"],
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
-      color: "red",
-    },
-  ];
+  });
+  if (error) {
+    Alert.alert("Error", "Some error occured. Please try again later!");
+  }
   return (
     <SafeView>
       <View style={tw`px-5 mt-3`}>
         <Text style={tw`text-3xl font-semibold`}>Pokedex</Text>
       </View>
 
-      <View style={tw`h-full w-full mt-7 px-2`}>
-        <FlashList
-          data={pokemons}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <PokemonCard pokemon={item} />}
-          estimatedItemSize={50}
-          numColumns={2}
-        />
-      </View>
+      {isLoading ? (
+        <ActivityIndicator size={40} style={tw`mt-8`} color={"red"} />
+      ) : (
+        <View style={tw`h-full w-full mt-7 px-2`}>
+          <FlashList
+            data={data?.results}
+            keyExtractor={(_, i) => i.toString()}
+            renderItem={({ item }) => <PokemonCard pokemon={item} />}
+            estimatedItemSize={50}
+            numColumns={2}
+          />
+        </View>
+      )}
     </SafeView>
   );
 };

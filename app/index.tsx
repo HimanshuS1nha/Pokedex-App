@@ -12,9 +12,7 @@ export default function Index() {
   return (
     <View style={tw`flex-1 justify-center items-center bg-white gap-y-10`}>
       <Image
-        source={{
-          uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf9God5EPMyT8tCZk18qvBgSXp3mct8bjI0w&s",
-        }}
+        source={require("../assets/images/pokedex.png")}
         style={tw`w-68 h-60`}
         resizeMode="stretch"
       />
