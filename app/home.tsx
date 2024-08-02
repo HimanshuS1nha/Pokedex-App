@@ -33,7 +33,7 @@ const Home = () => {
         <View style={tw`h-full w-full mt-7 px-2 pb-20`}>
           <FlashList
             data={data?.results}
-            keyExtractor={(_, i) => i.toString()}
+            keyExtractor={(item) => item.name}
             renderItem={({ item }) => <PokemonCard pokemon={item} />}
             estimatedItemSize={50}
             numColumns={2}
