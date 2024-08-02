@@ -1,11 +1,20 @@
-import { View, Text, Image, ActivityIndicator, Alert } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  ActivityIndicator,
+  Alert,
+  Pressable,
+} from "react-native";
+import React, { useCallback } from "react";
 import tw from "twrnc";
 import { useQuery } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
+import { router } from "expo-router";
 
 import { PokemonType } from "@/types";
 import { getColor } from "@/utils/get-color";
+import { usePokemon } from "@/hooks/usePokemon";
 
 const PokemonCard = ({
   pokemon,
@@ -15,6 +24,8 @@ const PokemonCard = ({
     url: string;
   };
 }) => {
+  const { setPokemon } = usePokemon();
+
   const { data, isLoading, error } = useQuery({
     queryKey: [`get-pokemon-${pokemon.name}`],
     queryFn: async () => {
@@ -25,13 +36,19 @@ const PokemonCard = ({
   if (error) {
     Alert.alert("Error", "Some error occured. Please try again later!");
   }
+
+  const color = data ? getColor(data?.types?.[0]?.type?.name) : "";
+
+  const handlePress = useCallback(() => {
+    if (color && data) {
+      setPokemon({ ...data, color });
+      router.push("/pokemon");
+    }
+  }, [color, data]);
   return (
-    <View
-      //@ts-ignore
-      style={tw`w-[97%] h-36 rounded-2xl px-3 pt-5 mb-4 ${getColor(
-        //@ts-ignore
-        data?.types?.[0]?.type?.name
-      )}`}
+    <Pressable
+      style={tw`w-[97%] h-36 rounded-2xl px-3 pt-5 mb-4 ${color as string}`}
+      onPress={handlePress}
     >
       {isLoading ? (
         <ActivityIndicator color={"red"} size={40} />
@@ -74,7 +91,7 @@ const PokemonCard = ({
           </View>
         </>
       )}
-    </View>
+    </Pressable>
   );
 };
 

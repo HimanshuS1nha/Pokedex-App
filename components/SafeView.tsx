@@ -1,5 +1,4 @@
 import {
-  Text,
   StyleProp,
   ViewStyle,
   SafeAreaView,
@@ -16,18 +15,22 @@ const SafeView = ({
   style?: StyleProp<ViewStyle>;
 }) => {
   return (
-    <SafeAreaView
-      style={[
-        {
-          paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-          flex: 1,
-          backgroundColor: "#fff",
-        },
-        style,
-      ]}
-    >
-      {children}
-    </SafeAreaView>
+    <>
+      <SafeAreaView
+        style={[
+          {
+            paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+            flex: 1,
+            backgroundColor: "#fff",
+          },
+          style,
+        ]}
+      >
+        {children}
+      </SafeAreaView>
+
+      <StatusBar barStyle={style ? "light-content" : "dark-content"} />
+    </>
   );
 };
 
