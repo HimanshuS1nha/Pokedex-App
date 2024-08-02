@@ -104,7 +104,9 @@ const Pokemon = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={tw`bg-white w-full h-full rounded-t-3xl`}
-      ></ScrollView>
+      >
+        
+      </ScrollView>
     </SafeView>
   );
 };
