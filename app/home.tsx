@@ -1,10 +1,18 @@
-import { View, Text, ActivityIndicator, Alert, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Alert,
+  ScrollView,
+  Pressable,
+} from "react-native";
 import React, { useEffect } from "react";
 import tw from "twrnc";
 import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import SafeView from "@/components/SafeView";
 import PokemonCard from "@/components/PokemonCard";
@@ -54,6 +62,12 @@ const Home = () => {
         )}
         <Pagination pageNumber={parseInt(pageNumber)} />
       </ScrollView>
+
+      <Pressable
+        style={tw`bg-blue-600 absolute p-2.5 rounded-full bottom-5 right-3.5`}
+      >
+        <FontAwesome name="search" size={30} color="white" />
+      </Pressable>
     </SafeView>
   );
 };

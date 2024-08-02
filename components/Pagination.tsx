@@ -43,7 +43,7 @@ const Pagination = ({ pageNumber }: { pageNumber: number }) => {
             />
           </Pressable>
           <Text style={tw`text-base font-semibold`}>
-            Showing : {pageNumber}/{Math.ceil(data!.count / 20)}
+            Page : {pageNumber} of {Math.ceil(data!.count / 20)}
           </Text>
           <Pressable
             onPress={() =>
