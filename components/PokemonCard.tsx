@@ -28,10 +28,10 @@ const PokemonCard = ({
   return (
     <View
       //@ts-ignore
-      style={tw`w-[97%] ${getColor(
+      style={tw`w-[97%] h-36 rounded-2xl px-3 pt-5 mb-4 ${getColor(
         //@ts-ignore
         data?.types?.[0]?.type?.name
-      )} h-36 rounded-2xl px-3 pt-5 mb-4`}
+      )}`}
     >
       {isLoading ? (
         <ActivityIndicator color={"red"} size={40} />
