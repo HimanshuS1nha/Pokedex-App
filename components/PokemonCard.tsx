@@ -42,7 +42,7 @@ const PokemonCard = ({
   const handlePress = useCallback(() => {
     if (color && data) {
       setPokemon({ ...data, color });
-      router.push("/pokemon");
+      router.push("/about");
     }
   }, [color, data]);
   return (

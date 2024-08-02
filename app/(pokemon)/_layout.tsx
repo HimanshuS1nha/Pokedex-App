@@ -1,3 +1,4 @@
+import { Stack } from "expo-router";
 import {
   View,
   Text,
@@ -11,11 +12,11 @@ import React, { useCallback, useEffect } from "react";
 import tw from "twrnc";
 import { router } from "expo-router";
 import Entypo from "@expo/vector-icons/Entypo";
-
 import SafeView from "@/components/SafeView";
 import { usePokemon } from "@/hooks/usePokemon";
+import Header from "@/components/Header";
 
-const Pokemon = () => {
+const PokemonLayout = () => {
   const { pokemon, setPokemon } = usePokemon();
   const spinValue = new Animated.Value(0);
   const rotate = spinValue.interpolate({
@@ -92,7 +93,7 @@ const Pokemon = () => {
             resizeMode="stretch"
           />
           <Animated.Image
-            source={require("../assets/images/pokeball-white.png")}
+            source={require("../../assets/images/pokeball-white.png")}
             style={[
               tw`w-48 h-48 opacity-20 absolute -bottom-5`,
               { transform: [{ rotate }] },
@@ -101,14 +102,16 @@ const Pokemon = () => {
           />
         </View>
       </View>
+
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={tw`bg-white w-full h-full rounded-t-3xl`}
+        contentContainerStyle={tw`bg-white w-full h-full rounded-t-[40px]`}
       >
-        
+        <Header />
+        <Stack screenOptions={{ headerShown: false }} />
       </ScrollView>
     </SafeView>
   );
 };
 
-export default Pokemon;
+export default PokemonLayout;
