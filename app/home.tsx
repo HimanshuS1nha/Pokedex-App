@@ -6,7 +6,7 @@ import {
   ScrollView,
   Pressable,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import tw from "twrnc";
 import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
@@ -17,10 +17,13 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import SafeView from "@/components/SafeView";
 import PokemonCard from "@/components/PokemonCard";
 import Pagination from "@/components/Pagination";
+import BottomSearchSheet from "@/components/BottomSearchSheet";
 
 const Home = () => {
   const searchParams = useLocalSearchParams();
   const pageNumber = (searchParams.pageNumber as string) ?? "1";
+
+  const [isVisible, setIsVisible] = useState(false);
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["get-all-pokemon"],
@@ -65,9 +68,12 @@ const Home = () => {
 
       <Pressable
         style={tw`bg-blue-600 absolute p-2.5 rounded-full bottom-5 right-3.5`}
+        onPress={() => setIsVisible(true)}
       >
         <FontAwesome name="search" size={30} color="white" />
       </Pressable>
+
+      <BottomSearchSheet isVisible={isVisible} setIsVisible={setIsVisible} />
     </SafeView>
   );
 };
