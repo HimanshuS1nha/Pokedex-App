@@ -46,7 +46,7 @@ const Home = () => {
         <Text style={tw`text-3xl font-semibold`}>Pokedex</Text>
       </View>
 
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {isLoading ? (
           <ActivityIndicator size={40} style={tw`mt-8`} color={"red"} />
         ) : (

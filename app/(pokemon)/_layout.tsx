@@ -10,8 +10,9 @@ import {
 } from "react-native";
 import React, { useCallback, useEffect } from "react";
 import tw from "twrnc";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import Entypo from "@expo/vector-icons/Entypo";
+
 import SafeView from "@/components/SafeView";
 import { usePokemon } from "@/hooks/usePokemon";
 import Header from "@/components/Header";
@@ -51,7 +52,7 @@ const PokemonLayout = () => {
     }
   }, []);
 
-  useEffect(() => spin(), []);
+  useFocusEffect(() => spin());
   return (
     <SafeView style={tw`${pokemon!.color}`}>
       <View style={tw`h-[315px] px-2 mt-2 gap-y-6`}>
