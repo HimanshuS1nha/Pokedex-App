@@ -50,7 +50,10 @@ const BottomSearchSheet = ({
   });
   return (
     <Modal transparent visible={isVisible}>
-      <View style={tw`flex-1 bg-gray-100/30`}></View>
+      <Pressable
+        style={tw`flex-1 bg-gray-100/30`}
+        onPress={() => setIsVisible(false)}
+      ></Pressable>
       <View
         style={tw`absolute w-full h-32 bg-white bottom-0 z-10 flex-row gap-x-4 px-4 items-center`}
       >
