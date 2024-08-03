@@ -1,4 +1,4 @@
-import { View, Text, Image, Alert } from "react-native";
+import { View, Text, Image, Alert, ActivityIndicator } from "react-native";
 import React from "react";
 import tw from "twrnc";
 import { Entypo } from "@expo/vector-icons";
@@ -32,29 +32,37 @@ const EvolutionDetails = ({ name, id }: { name: string; id: string }) => {
   }
   return (
     <View style={tw`flex-row gap-x-6 items-center`}>
-      <View style={tw`gap-y-4 items-center`}>
-        <Image
-          source={{
-            uri: pokemon?.sprites.other["official-artwork"].front_default,
-          }}
-          style={tw`w-36 h-36`}
-        />
-        <Text style={tw`text-xl font-semibold capitalize`}>
-          {pokemon?.name}
-        </Text>
-      </View>
+      {isLoading ? (
+        <View style={tw`flex-1 justify-center items-center`}>
+          <ActivityIndicator color={"red"} size={50} />
+        </View>
+      ) : (
+        <>
+          <View style={tw`gap-y-4 items-center`}>
+            <Image
+              source={{
+                uri: pokemon?.sprites.other["official-artwork"].front_default,
+              }}
+              style={tw`w-36 h-36`}
+            />
+            <Text style={tw`text-xl font-semibold capitalize`}>
+              {pokemon?.name}
+            </Text>
+          </View>
 
-      <Entypo name="arrow-right" size={40} />
+          <Entypo name="arrow-right" size={40} />
 
-      <View style={tw`gap-y-4 items-center`}>
-        <Image
-          source={{
-            uri: data?.sprites.other["official-artwork"].front_default,
-          }}
-          style={tw`w-36 h-36`}
-        />
-        <Text style={tw`text-xl font-semibold capitalize`}>{name}</Text>
-      </View>
+          <View style={tw`gap-y-4 items-center`}>
+            <Image
+              source={{
+                uri: data?.sprites.other["official-artwork"].front_default,
+              }}
+              style={tw`w-36 h-36`}
+            />
+            <Text style={tw`text-xl font-semibold capitalize`}>{name}</Text>
+          </View>
+        </>
+      )}
     </View>
   );
 };

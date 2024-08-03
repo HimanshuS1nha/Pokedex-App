@@ -55,14 +55,8 @@ const BottomSearchSheet = ({
         onPress={() => setIsVisible(false)}
       ></Pressable>
       <View
-        style={tw`absolute w-full h-32 bg-white bottom-0 z-10 flex-row gap-x-4 px-4 items-center`}
+        style={tw`absolute w-full h-28 bg-white bottom-0 z-10 flex-row gap-x-4 px-4 items-center`}
       >
-        <Pressable
-          style={tw`absolute top-1 right-1`}
-          onPress={() => setIsVisible(false)}
-        >
-          <Entypo name="cross" size={27} color="black" />
-        </Pressable>
         <TextInput
           placeholder="Search pokemon"
           style={tw`border rounded-full px-4 py-2 w-[70%]`}

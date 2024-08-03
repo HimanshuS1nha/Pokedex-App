@@ -9,7 +9,6 @@ import EvolutionDetails from "@/components/EvolutionDetails";
 
 const Evolution = () => {
   const { evolutionChainUrl, pokemon } = usePokemon();
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["get-evolution-details"],
     queryFn: async () => {
@@ -35,9 +34,8 @@ const Evolution = () => {
         </View>
       )}
       {!isLoading &&
-      (data?.chain.evolves_to[0].evolves_to?.length === 0 ||
-        data?.chain.evolves_to[0].evolves_to?.[0]?.species?.name ===
-          pokemon?.name) ? (
+      data?.chain.evolves_to[0].evolves_to?.[0]?.species?.name ===
+        pokemon?.name ? (
         <Text style={tw`text-center text-xl text-rose-600 font-medium`}>
           This pokemon does not evolve.
         </Text>
