@@ -6,7 +6,7 @@ import {
   ScrollView,
   Pressable,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import tw from "twrnc";
 import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
@@ -37,7 +37,7 @@ const Home = () => {
     Alert.alert("Error", "Some error occured. Please try again later!");
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     refetch();
   }, [pageNumber]);
   return (

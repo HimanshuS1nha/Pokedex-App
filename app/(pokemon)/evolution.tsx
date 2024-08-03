@@ -4,7 +4,7 @@ import tw from "twrnc";
 
 const Evolution = () => {
   return (
-    <View style={tw`flex-1 bg-white`}>
+    <View style={tw`flex-1 bg-white pt-9 px-4`}>
       <Text>Evolution</Text>
     </View>
   );

@@ -47,13 +47,15 @@ const About = () => {
             <View style={tw`gap-y-2`}>
               <Text style={tw`font-medium text-base`}>Weight</Text>
               <Text>
-                {pokemon?.weight} lbs ({pokemon!.weight * 0.453592} kg)
+                {pokemon?.weight} lbs ({(pokemon!.weight * 0.453592).toFixed(4)}{" "}
+                kg)
               </Text>
             </View>
             <View style={tw`gap-y-2`}>
               <Text style={tw`font-medium text-base`}>Height</Text>
               <Text>
-                {pokemon?.height} feet ({pokemon!.height * 0.3048} m)
+                {pokemon?.height} feet ({(pokemon!.height * 0.3048).toFixed(4)}{" "}
+                m)
               </Text>
             </View>
           </View>
