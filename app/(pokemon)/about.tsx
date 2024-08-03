@@ -1,5 +1,5 @@
 import { View, Text, Alert, ActivityIndicator } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import tw from "twrnc";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -7,7 +7,7 @@ import axios from "axios";
 import { usePokemon } from "@/hooks/usePokemon";
 
 const About = () => {
-  const { pokemon } = usePokemon();
+  const { pokemon, setEvolutionChainUrl } = usePokemon();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["get-description"],
@@ -17,15 +17,25 @@ const About = () => {
       );
 
       return data as {
-        flavor_text_entries: { flavor_text: string }[];
+        flavor_text_entries: {
+          flavor_text: string;
+          language: { name: string };
+        }[];
         base_happiness: number;
         capture_rate: number;
+        evolution_chain: { url: string };
       };
     },
   });
   if (error) {
     Alert.alert("Error", "Some error occured. Please try again later!");
   }
+
+  useEffect(() => {
+    if (data?.evolution_chain.url) {
+      setEvolutionChainUrl(data.evolution_chain.url);
+    }
+  }, [data]);
   return (
     <View style={tw`flex-1 bg-white pt-9 px-4`}>
       {isLoading ? (
@@ -35,8 +45,9 @@ const About = () => {
       ) : (
         <View style={tw`gap-y-8`}>
           <Text style={tw`text-justify leading-7 text-base`}>
-            {data?.flavor_text_entries[0].flavor_text
-              .replaceAll("\n", " ")
+            {data?.flavor_text_entries
+              .filter((item) => item.language.name === "en")[0]
+              .flavor_text.replaceAll("\n", " ")
               .replaceAll("\f", " ")
               .replaceAll("\t", " ")}
           </Text>

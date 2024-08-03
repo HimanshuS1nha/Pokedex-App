@@ -18,7 +18,7 @@ import { usePokemon } from "@/hooks/usePokemon";
 import Header from "@/components/Header";
 
 const PokemonLayout = () => {
-  const { pokemon, setPokemon } = usePokemon();
+  const { pokemon, setPokemon, setEvolutionChainUrl } = usePokemon();
   const spinValue = new Animated.Value(0);
   const rotate = spinValue.interpolate({
     inputRange: [0, 1],
@@ -26,6 +26,7 @@ const PokemonLayout = () => {
   });
 
   const handleBack = useCallback(() => {
+    setEvolutionChainUrl("");
     setPokemon(null);
     router.back();
   }, []);
