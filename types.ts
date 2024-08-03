@@ -10,4 +10,6 @@ export type PokemonType = {
     };
   };
   stats: { base_stat: number; stat: { name: string } }[];
+  height: number;
+  weight: number;
 };
