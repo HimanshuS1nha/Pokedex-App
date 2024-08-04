@@ -16,6 +16,7 @@ The ultimate Pokedex app: your comprehensive guide to the Pokémon universe! Exp
 
 - Browse through all the pokemon
 - Search your favourite pokemon
+- Pagination
 
 ## TECH STACK USED
 
