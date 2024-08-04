@@ -24,7 +24,7 @@ The ultimate Pokedex app: your comprehensive guide to the Pokémon universe! Exp
 
 ## Demo
 
-Live Demo - Coming Soon
+Live Demo - [Click Here](https://www.youtube.com/shorts/fjGjebJgMv0)
 
 ## 🚀 About Me
 
